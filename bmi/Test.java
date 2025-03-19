@@ -35,7 +35,7 @@ public class Test {
 
             BMICalculator calc2 = new BMICalculator(name, weight, height);
             calc2.calculateBMI();
-            
+
             System.out.print(calc2.getName() + " - twoje BMI: ");
             System.out.format("%.2f\n", calc2.getBMI());
             System.out.println("Nadwaga: " + calc2.isOverweight());
