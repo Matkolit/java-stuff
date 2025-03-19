@@ -21,11 +21,14 @@ public class Test {
             BMICalculator calc1 = new BMICalculator(name, weight, height);
 
             calc1.calculateBMI();
+            
+            calc1.getBmiCategory();
 
+            
             System.out.print(calc1.getName() + " - twoje BMI: ");
             System.out.format("%.2f\n", calc1.getBMI());
             System.out.println("Nadwaga: " + calc1.isOverweight());
-
+            
             System.out.print("\nPodaj imię: ");
             name = sc.nextLine();
             System.out.print("Podaj wzrost(m): ");
