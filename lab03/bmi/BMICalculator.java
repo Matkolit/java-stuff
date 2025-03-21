@@ -19,13 +19,29 @@ public class BMICalculator {
     public boolean isOverweight() {
         return (bmi > 25);
     }
+    public String getRiskLevel() {
+        double[] scale = {18.49, 24.99, 29.99, 34.99, 39.99};
+
+        String[] riskLevels = {
+            "minimalne, ale zwiększony poziom wystąpenia innych problemów zdrowotnych",
+            "minimalne",
+            "średnie",
+            "wysokie",
+            "bardzo wysokie",
+            "ekstremalny poziom ryzyka"
+        };
+
+        return riskLevels[getColumnIndex(scale)];
+    }
 
     public String getName() {
         return name;
     }
 
     public String getBmiCategory() {
-        String[] category = {
+        double[] scale = {16, 16.99, 18.49, 24.99, 29.99, 34.99, 39.99};
+
+        String[] categories = {
             "wygłodzenie",
             "wychudzenie",
             "niedowaga",
@@ -35,22 +51,19 @@ public class BMICalculator {
             "otyłość II stopnia (duża)",
             "otyłość III stopnia (chorobliwa)"
         };
-
-        double[] scale = {16, 16.99, 18.49, 24.99, 29.99, 34.99, 39.99};
-        int currentIdx = 0;
-
-        while (currentIdx < scale.length && bmi > scale[currentIdx]) {
-            currentIdx++;
-        }
-
-        System.out.println(category[currentIdx]);
-
-        System.out.println(bmi);
-        return name;
+        return categories[getColumnIndex(scale)];
     }
 
     public double getBMI() {
         return bmi;
     }
 
-} 
+    private int getColumnIndex(double[] scale) {
+
+        int currentIdx = 0;
+        while (currentIdx < scale.length && bmi > scale[currentIdx]) {
+            currentIdx++;
+        }
+        return currentIdx;
+    }
+}
