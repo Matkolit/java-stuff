@@ -1,9 +1,14 @@
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Distance {
   private static final double EARTH_RADIUS = 6371.0;
   private static final double WARSAW_LON = 21.008490;
   private static final double WARSAW_LAT = 52.234982;
+  private static final String pathFile = "./results.txt";
 
   public static void main(String[] args) {
     Scanner userIn = new Scanner(System.in);
@@ -13,6 +18,8 @@ public class Distance {
     var distance = distance(WARSAW_LAT, WARSAW_LON, coordinates[1], coordinates[0]);
 
     System.out.printf("\nOdległość między punktami wynosi %.2fkm.\n", distance);
+
+    saveResult(distance);
     userIn.close();
 
   }
@@ -55,6 +62,19 @@ public class Distance {
 
     return EARTH_RADIUS * c;
   }
+
+ private static void saveResult(double distance){
+  try {
+    BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile));
+    String formattedResult = String.format("%.2f", distance);
+    writer.write(formattedResult + " km.");
+    writer.close();
+  } catch(IOException e){
+    System.out.println("Nie udało się zapisać do pliku");
+  }  catch (Exception e) {
+    System.out.println("Coś poszło nie tak");
+  }
+ }
 
   private static void clearBuffer(Scanner scanner) {
     System.out.println("Niepoprawny format liczby. Spróbuj ponownie");
